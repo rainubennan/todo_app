@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[200],
+      // backgroundColor: Colors.yellow[200],
       appBar: AppBar(title: Text('To Do'),
       elevation: 0,),
       floatingActionButton: FloatingActionButton(
@@ -40,16 +40,26 @@ class _HomeState extends State<Home> {
         creatNewtask(),
 
       child: Icon(Icons.add),),
-      body: ListView.builder(
-          itemCount:  db.toDoList.length        ,
-          itemBuilder: (context,index){
-            return ToDoTile(
-                taskName: db.toDoList[index][0],
-                taskComplete: db.toDoList[index][1],
-                onChanged: (value)=> checkBoxChanged(value,index),
-              deleteFunction: (context) =>  deleteTask(index)
-            );
-          })
+      body: Container(
+        decoration: BoxDecoration(image: DecorationImage(fit:BoxFit.cover,image: NetworkImage('https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=600'),),),
+        child: Column(
+          children: [
+            ListView.builder(
+              shrinkWrap: true
+                ,
+                itemCount:  db.toDoList.length        ,
+                itemBuilder: (context,index){
+                  return ToDoTile(
+                      taskName: db.toDoList[index][0],
+                      taskComplete: db.toDoList[index][1],
+                      onChanged: (value)=> checkBoxChanged(value,index),
+                    deleteFunction: (context) =>  deleteTask(index)
+                  );
+                }),
+            
+          ],
+        ),
+      )
     );
   }
 
@@ -76,8 +86,9 @@ class _HomeState extends State<Home> {
     setState(() {
       db.toDoList.add(([_controller.text,false]));
       _controller.clear();
+      Navigator.of(context).pop();
     });
-    Navigator.of(context).pop();
+  db.updateDatabase();
   }
 
   void deleteTask(int index) {
