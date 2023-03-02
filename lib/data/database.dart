@@ -15,4 +15,10 @@ toDoList= _mybox.get("TODOLIST");
  void updateDatabase(){
 _mybox.put("TODOLIST", toDoList);
  }
+//
+// void deleteTask(int index) {
+//
+//     _mybox.delete(index);
+//
+// }
 }

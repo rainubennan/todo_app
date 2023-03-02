@@ -81,8 +81,13 @@ class _HomeState extends State<Home> {
   }
 
   void deleteTask(int index) {
+    print('delete');
     setState(() {
-      db.toDoList.removeAt(index);
+        db.toDoList.removeAt(index);
+
+
+
     });
+
   }
 }
